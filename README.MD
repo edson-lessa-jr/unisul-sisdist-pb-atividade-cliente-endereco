@@ -13,7 +13,7 @@ Possibilitar consultar o endereço por CEP. (Considerar um CEP por registro)
 
 ## Prazo
 A Atividade deverá ser desenvolvida na sala de aula as 2º
-Data de apresentação 11/10. 
+Data de apresentação 18/10. 
 
 ### Informações adicionais
 * As classes concretas já estão definidas
