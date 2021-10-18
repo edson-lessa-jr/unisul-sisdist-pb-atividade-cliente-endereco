@@ -1,6 +1,12 @@
 package br.unisul.aula.mscliente.modelo;
 
+import javax.persistence.*;
+
+@Entity
+@SequenceGenerator(name="seq_cliente",sequenceName="my_seq_cliente", allocationSize=1)
 public class Cliente {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_cliente")
     private Long id;
     private String nome;
     private Long endereco_id;

@@ -4,18 +4,20 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "tb_endereco")
+@SequenceGenerator(name="seq_endereco",sequenceName="my_seq_endereco", allocationSize=1)
 public class Endereco {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_endereco")
     private Long id;
     @Column(nullable = false)
     private String logradouro;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private Integer cep;
     private String bairro;
     private String cidade;
     @Enumerated(EnumType.STRING)
     private UnidadeFederativa uf;
+
 
     public Endereco() {
     }

@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: 'endereco'
+  profiles:
+    active: 'pb'
+  cloud:
+    config:
+      uri: ${CONFIG}
