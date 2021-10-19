@@ -20,7 +20,11 @@ public class ClienteService {
     private ClienteRepository clienteRepository;
 
     @Autowired
-    private RestTemplate enderecoClient;
+    private EnderecoClient enderecoClient;
+
+    // Quando utilizado o Feign, não é necessário permanecer
+    @Autowired
+    private RestTemplate enderecoRaimbow;
 
     public List<ClienteDTO> listarTodos() {
         List<ClienteDTO> dtos = new ArrayList<>();
@@ -31,13 +35,29 @@ public class ClienteService {
         }
         return dtos;
     }
-
+    // Abstração do Feign
     private EnderecoDTO buscarEnderecoPorID(Long id) {
-        ResponseEntity<EnderecoDTO> exchange = enderecoClient.exchange("http://endereco/end/id/" + id, HttpMethod.GET, null, EnderecoDTO.class);
+        return enderecoClient.buscarPorId(id);
+    }
+
+    // Utilizado no para comunicação, o Feign monta isso para nós
+    // Utilizado na resolução da atividade
+    private EnderecoDTO buscarEnderecoPorIDRaimbow(Long id) {
+
+        ResponseEntity<EnderecoDTO> exchange = enderecoRaimbow.
+                exchange("http://endereco/end/id/" + id,
+                HttpMethod.GET, null, EnderecoDTO.class);
         return exchange.getBody();
     }
+    // Abstração do Feign
     private EnderecoDTO buscarEnderecoPorCep(Integer cep) {
-        ResponseEntity<EnderecoDTO> exchange = enderecoClient.exchange("http://endereco/end/" + cep, HttpMethod.GET, null, EnderecoDTO.class);
+        return enderecoClient.buscarPorCep(cep);
+    }
+    // Utilizado no para comunicação, o Feign monta isso para nós
+    // Utilizado na resolução da atividade
+    private EnderecoDTO buscarEnderecoPorCepRaimbow(Integer cep) {
+        ResponseEntity<EnderecoDTO> exchange = enderecoRaimbow.exchange("http://endereco/end/" + cep,
+                HttpMethod.GET, null, EnderecoDTO.class);
         return exchange.getBody();
     }
 

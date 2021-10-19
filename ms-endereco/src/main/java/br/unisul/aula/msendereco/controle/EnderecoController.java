@@ -21,6 +21,7 @@ public class EnderecoController {
     @GetMapping("/")
     public List<EnderecoDTO> listarTodosEnderecos(){
         List<EnderecoDTO> dtos = new ArrayList<>();
+
         for (Endereco endereco: enderecoRepository.findAll()){
             EnderecoDTO dto = new EnderecoDTO(endereco);
             dtos.add(dto);
